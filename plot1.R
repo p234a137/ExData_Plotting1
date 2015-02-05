@@ -1,5 +1,4 @@
-
-
+# data: https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip
 # Date: Date in format dd/mm/yyyy
 # Time: time in format hh:mm:ss
 # Global_active_power: household global minute-averaged active power (in kilowatt)
@@ -30,4 +29,8 @@ householdPowerConsumption$Date <- as.Date(strptime(householdPowerConsumption$Dat
 # select dates between "2007-02-01" and "2007-02-02"
 householdPowerConsumption <- householdPowerConsumption[ (householdPowerConsumption$Date >= "2007-02-01" & householdPowerConsumption$Date <= "2007-02-02"), ]
 
-hist(householdPowerConsumption$Global_active_power, col="red")
+# create plot on the screen and copy to png file
+hist(householdPowerConsumption$Global_active_power,
+     col="red", main = "Global Active Power", xlab = "Global Active Power (kilowatts)" )
+dev.copy(png, file = "plot1.png")
+dev.off()
