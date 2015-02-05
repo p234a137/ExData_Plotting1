@@ -17,10 +17,12 @@ memory_required = no_of_columns * no_of_rows * 8
 cat("calculated memory required in bytes = ", memory_required/(1024*1024), units = "MB")
 cat("\nfile size = ", file.info("./household_power_consumption.txt")$size/(1024*1024))
 
+# read data in
 colClasses = c("character", "character", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric")
 householdPowerConsumption <- read.table("./household_power_consumption.txt", header = T, na.strings = "?", sep=";", quote="", comment.char = "")
 cat("\nactual object size = ", format(object.size(householdPowerConsumption), units = "MB"))
 
+# transform to dates and times
 householdPowerConsumption$datetime <- as.POSIXct(strptime(
   paste(householdPowerConsumption$Date, householdPowerConsumption$Time, sep=" ")
   , "%d/%m/%Y %H:%M:%S"))
