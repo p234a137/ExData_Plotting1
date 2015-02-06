@@ -12,11 +12,13 @@ householdPowerConsumption$Date <- as.Date(strptime(householdPowerConsumption$Dat
 # select dates between "2007-02-01" and "2007-02-02"
 householdPowerConsumption <- householdPowerConsumption[ (householdPowerConsumption$Date >= "2007-02-01" & householdPowerConsumption$Date <= "2007-02-02"), ]
 
-# create plot on the screen and copy to png file
+# create png file
+png(filename = "plot3.png", width = 480, height = 480, units = "px")
+# create plot
 plot(householdPowerConsumption$Sub_metering_1 ~ householdPowerConsumption$datetime, type="l", ann=F)
 points(householdPowerConsumption$Sub_metering_2 ~ householdPowerConsumption$datetime, type="l", col="red", ann=F)
 points(householdPowerConsumption$Sub_metering_3 ~ householdPowerConsumption$datetime, type="l", col="blue", ann=F)
-title( ylab = "Energy Metering")
-legend("topright", lty = 1, col = c("black", "blue", "red"), legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), cex = 0.6)
-dev.copy(png, file = "plot3.png")
+title( ylab = "Energy sub metering")
+legend("topright", lty = 1, col = c("black", "blue", "red"), legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
+#dev.copy(png, file = "plot3.png")
 dev.off()

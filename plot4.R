@@ -13,9 +13,19 @@ householdPowerConsumption$Date <- as.Date(strptime(householdPowerConsumption$Dat
 householdPowerConsumption <- householdPowerConsumption[ (householdPowerConsumption$Date >= "2007-02-01" & householdPowerConsumption$Date <= "2007-02-02"), ]
 
 # create png file
-png(filename = "plot2.png", width = 480, height = 480, units = "px")
-# create plot
+png(filename = "plot4.png", width = 480, height = 480, units = "px")
+par(mfcol = c(2, 2))
+# create (1,1)
 plot(householdPowerConsumption$Global_active_power ~ householdPowerConsumption$datetime, type="l", ann=F)
 title( ylab = "Global Active Power (kilowatts)")
-#dev.copy(png, file = "plot2.png")
+# create (1,2)
+plot(householdPowerConsumption$Sub_metering_1 ~ householdPowerConsumption$datetime, type="l", ann=F)
+points(householdPowerConsumption$Sub_metering_2 ~ householdPowerConsumption$datetime, type="l", col="red", ann=F)
+points(householdPowerConsumption$Sub_metering_3 ~ householdPowerConsumption$datetime, type="l", col="blue", ann=F)
+title( ylab = "Energy sub metering")
+legend("topright", lty = 1, col = c("black", "blue", "red"), legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
+# create(2,1)
+with(householdPowerConsumption, plot(Voltage ~ datetime, type = "l"))
+# create(2,2)
+with(householdPowerConsumption, plot(Global_reactive_power ~ datetime, type = "l"))
 dev.off()
